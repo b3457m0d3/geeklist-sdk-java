@@ -42,7 +42,9 @@ public class ResponseParser {
 	    		result[i] = (GeeklistType) parseObject(targetObjectClass, jsonObject, relaxed);
 	    	} catch (JSONException e) {
 	    		throw new GeeklistApiException(e);
-	    	}
+	    	} catch (ClassCastException cce){
+                throw new GeeklistApiException(cce);
+            }
 	    }
 	    
 	    return result;
@@ -87,7 +89,7 @@ public class ResponseParser {
 	private static Object parseValue(Class<?> fieldClass, String fieldName, JSONObject object, boolean relaxed) throws GeeklistApiException
 	{
 		Object fieldObject = object.opt(fieldName);
-		
+
 		if(fieldObject instanceof JSONObject)
 		{
 			if(isGeeklistType(fieldClass))
@@ -141,8 +143,11 @@ public class ResponseParser {
 			{
 				return fieldClass.cast(fieldObject);
 			} else {
-				
-				if(fieldClass.equals(Date.class))
+
+                if(fieldObject.equals(JSONObject.NULL) ){
+                    //Houston, we have no value
+                    return null;
+                }else if(fieldClass.equals(Date.class))
 				{
 					// 2011-08-21T20:50:50.445Z
 					String rawTime = String.class.cast(fieldObject);
@@ -156,7 +161,6 @@ public class ResponseParser {
 				}
 				
 				return null;
-				// TODO: Ignore for now...Geekli.st may response with JSONObject$Null
 				//throw new GeeklistApiException("Mismatching source and target class, Source: "+ fieldClass.getSimpleName() + ", Target: "+ fieldObject.getClass().getSimpleName());
 			}
 			
