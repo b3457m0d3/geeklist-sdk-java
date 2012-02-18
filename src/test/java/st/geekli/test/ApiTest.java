@@ -20,6 +20,7 @@ import static org.junit.Assert.*;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import st.geekli.api.GeeklistApi;
@@ -29,26 +30,89 @@ import st.geekli.api.type.Card;
 import st.geekli.api.type.Micro;
 import st.geekli.api.type.User;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
+
 public class ApiTest {
 
+    //TODO move me to property files
+
 	// Enter your API credentials here.
-    private static final String CONSUMER_KEY = "<consumerkey>";
-    private static final String CONSUMER_SECRET = "<consumer_secret>";
-    private static final String TOKEN = "<token>";
-    private static final String TOKEN_SECRET = "<token_secret>";
+	private static String CONSUMER_KEY;
+	private static String CONSUMER_SECRET;
+	private static String TOKEN;
+	private static String TOKEN_SECRET;
 
 	// Objects used for testing
-	private static final String GKLST_HANDLE_YOU = "stefanhoth";
-	private static final String GKLST_HANDLE_SOMEONE_ELSE = "mauimauer";
-	private static final String FOLLOW_USER = "8eb84d80be1f6fc88c20bf17b6f1e30e088be4d9684be95641c0184e8b2eb063"; //TechWraith
-	private static final String CARD_ID = "434c8603250f97cb28d769a3d882b5633f4624b5f89cd1277ab62b358ac71ab3";
-	private static final String HIGHFIVE_ITEM = "d0df3e63c9cb66f3fb4e0c15d93a003796c97c0c6600c1e86392730d6e50ee89";
+	private static String GKLST_HANDLE_YOU;
+	private static String GKLST_HANDLE_SOMEONE_ELSE;
+	private static String FOLLOW_USER;
+	private static String CARD_ID;
+	private static String HIGHFIVE_ITEM;
 		
 	private static GeeklistApi client;
-	
-	@BeforeClass public static void beforeClass()
+    
+    private static final String PROPS_FILE_API = "geeklist-api.properties"; 
+    private static final String PROPS_FILE_TEST = "geeklist-api-test.properties"; 
+
+    public static void setup() {
+
+        Properties props_api = loadProperties(PROPS_FILE_API);
+
+        if(props_api == null){
+            return;
+        }
+
+        CONSUMER_KEY = (String) props_api.get("CONSUMER_KEY");
+        CONSUMER_SECRET = (String) props_api.get("CONSUMER_SECRET");
+        TOKEN = (String) props_api.get("TOKEN");
+        TOKEN_SECRET = (String) props_api.get("TOKEN_SECRET");
+
+        Properties props_test = loadProperties(PROPS_FILE_TEST);
+
+        if(props_test == null){
+              return;
+        }
+
+        GKLST_HANDLE_YOU = (String) props_test.get("GKLST_HANDLE_YOU");
+        GKLST_HANDLE_SOMEONE_ELSE = (String) props_test.get("GKLST_HANDLE_SOMEONE_ELSE");
+        FOLLOW_USER = (String) props_test.get("FOLLOW_USER");
+        CARD_ID = (String) props_test.get("CARD_ID");
+        HIGHFIVE_ITEM = (String) props_test.get("HIGHFIVE_ITEM");
+
+    }
+
+    /**
+     * handle loading of property files
+     * @param filename name of the properties file to load
+     * @return
+     */
+    private static Properties loadProperties(String filename)  {
+
+        FileInputStream fis;
+        try {
+            fis = new FileInputStream(filename);
+            Properties props = new Properties();
+            props.load(fis);
+
+            return props;
+
+        } catch (FileNotFoundException e) {
+            GeeklistApi.debugOut("Properties file missing",PROPS_FILE_API);
+            return null;
+        } catch (IOException e) {
+            GeeklistApi.debugOut("IOException while reading properties file '"+filename+"'",e.getMessage());
+            return null;
+        }
+
+    }
+
+    @BeforeClass public static void beforeClass()
 	{
-		client = new GeeklistApi(CONSUMER_KEY, CONSUMER_SECRET, TOKEN, TOKEN_SECRET, true);
+        setup();
+        client = new GeeklistApi(CONSUMER_KEY, CONSUMER_SECRET, TOKEN, TOKEN_SECRET, true);
 	}
 	
 	@Test public void testGetUser()
@@ -85,7 +149,9 @@ public class ApiTest {
 			}
 			
 		} catch (GeeklistApiException e) {
-			fail("getCards() failed!");
+            e.printStackTrace();
+            fail(e.getMessage());
+			//fail("getCards() failed!");
 		}
 	}
 	
@@ -124,7 +190,7 @@ public class ApiTest {
 			assertNotNull("Creating a card failed!", newCard);
 			assertNotNull("id of new card can't be null!", newCard.getId());
 		} catch (GeeklistApiException e) {
-			fail("createCard(headline) failed!");
+			fail("createCard(headline) failed! -> "+e);
 		}
 	}
 	
@@ -140,7 +206,7 @@ public class ApiTest {
 			}
 			
 		} catch (GeeklistApiException e) {
-			fail("getMicros() failed!");
+			fail("getMicros() failed! -> " + e);
 		}
 	}
 	
@@ -156,7 +222,7 @@ public class ApiTest {
 			}
 			
 		} catch (GeeklistApiException e) {
-			fail("getMicros(username) failed!");
+			fail("getMicros(username) failed! -> " + e);
 		}
 	}
 	
@@ -167,7 +233,7 @@ public class ApiTest {
 			assertNotNull("Creating a micro failed!", micro);
 			assertNotNull("id of new micro can't be null!", micro.getId());
 		} catch (GeeklistApiException e) {
-			fail("createMicro(status) failed!");
+			fail("createMicro(status) failed! -> " + e);
 		}
 	}
 	
@@ -183,7 +249,7 @@ public class ApiTest {
 				assertNotNull("id can't be null!", followers[0].getId());
 			}
 		} catch (GeeklistApiException e) {
-			fail("getFollowers() failed!");
+			fail("getFollowers() failed! -> " + e);
 		}
 	}
 	
@@ -235,22 +301,22 @@ public class ApiTest {
 		}
 	}
 
-    @Test public void testUnFollow()
+    @Test @Ignore public void testUnFollow()
     {
 
         try {
             client.unfollow(FOLLOW_USER);
         } catch (GeeklistApiException e) {
-            fail("unfollow(username) failed!");
+            fail("unfollow(username) failed! "+ e);
         }
     }
 
-	@Test public void testFollow()
+	@Test @Ignore public void testFollow()
 	{
 		try {
 			client.follow(FOLLOW_USER);
 		} catch (GeeklistApiException e) {
-			fail("follow(username) failed!");
+			fail("follow(username) failed! -> "+e);
 		}
 	}
 
@@ -266,7 +332,7 @@ public class ApiTest {
 				assertNotNull("id can't be null!", activities[0].getId());
 			}
 		} catch (GeeklistApiException e) {
-			fail("getActivity() failed!");
+			fail("getActivity() failed! ->" + e);
 		}
 	}
 	
@@ -302,12 +368,12 @@ public class ApiTest {
 		}
 	}
 	
-	@Test public void testHighfive()
+	@Test @Ignore public void testHighfive()
 	{
 		try {
 			client.highfive("card", HIGHFIVE_ITEM);
 		} catch (GeeklistApiException e) {
-			fail("highfive(type, id) failed!");
+			fail("highfive(type, id) failed! -> "+e);
 		}
 	}
 	

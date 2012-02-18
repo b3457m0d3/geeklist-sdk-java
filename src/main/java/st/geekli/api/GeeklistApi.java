@@ -387,6 +387,8 @@ public class GeeklistApi {
 	private Object internalDoRequest(String url, HashMap<String,Object> params, HttpMethod method, boolean sign) throws GeeklistApiException
 	{	
 		HttpRequestBase request = null;
+
+        GeeklistApi.debugOut("Request", method.toString()+" "+url+ " "+params.toString()+" | sign="+sign);
 		
 		switch(method)
 		{

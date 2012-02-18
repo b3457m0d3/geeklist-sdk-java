@@ -1,0 +1,6 @@
+#Objects used for testing
+GKLST_HANDLE_YOU= # clear name handle
+GKLST_HANDLE_SOMEONE_ELSE= # clear name handle
+FOLLOW_USER= # hash-id
+CARD_ID= # hash-id
+HIGHFIVE_ITEM= # hash-id

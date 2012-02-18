@@ -7,3 +7,8 @@
 
 #generated stuff
 target
+
+#ignore properties with values
+*.properties
+#but take the example into account
+!*.properties.default
