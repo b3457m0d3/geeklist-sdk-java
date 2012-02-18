@@ -40,4 +40,8 @@ public class GeeklistApiException extends Exception {
 		return code;
 	}
 
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName()+ " [reason: "+ this.getMessage()+"]";
+    }
 }
