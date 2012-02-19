@@ -481,6 +481,7 @@ public class GeeklistApi {
 				}
 					
 			} else {
+                response.getEntity().consumeContent();
 				throw new GeeklistApiException(response.getStatusLine().getReasonPhrase());
 			}
 				
