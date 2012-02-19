@@ -126,7 +126,7 @@ public class GeeklistApi {
 		return "";
 	}
 	
-	public void getAccessToken(String requestToken, String oauthVerifier) throws GeeklistApiException
+	public void getAccessToken(String oauthVerifier) throws GeeklistApiException
 	{
 		try {
 			mOAuthProvider.retrieveAccessToken(mOAuthConsumer, oauthVerifier);
