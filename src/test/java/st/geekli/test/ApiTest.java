@@ -112,7 +112,7 @@ public class ApiTest {
     @BeforeClass public static void beforeClass()
 	{
         setup();
-        client = new GeeklistApi(CONSUMER_KEY, CONSUMER_SECRET, TOKEN, TOKEN_SECRET, true);
+        client = new GeeklistApi(CONSUMER_KEY, CONSUMER_SECRET, TOKEN, TOKEN_SECRET, false);
 	}
 	
 	@Test public void testGetUser()
@@ -149,9 +149,7 @@ public class ApiTest {
 			}
 			
 		} catch (GeeklistApiException e) {
-            e.printStackTrace();
-            fail(e.getMessage());
-			//fail("getCards() failed!");
+			fail("getCards() failed! -> " +e);
 		}
 	}
 	
