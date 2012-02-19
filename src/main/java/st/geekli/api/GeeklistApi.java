@@ -84,15 +84,15 @@ public class GeeklistApi {
 		mOAuthConsumer.setTokenWithSecret(accessToken, accessTokenSecret);
 	}
 	
-	public String getOAuthToken() {
+	public String getAccessToken() {
 		return mOAuthConsumer.getToken();
 	}
 	
-	public String getOAuthTokenSecret() {
+	public String getAccessTokenSecret() {
 		return mOAuthConsumer.getTokenSecret();
 	}
 
-	public void setOAuthTokenAndSecret(String token, String tokenSecret) {
+	public void setAccessTokenAndSecret(String token, String tokenSecret) {
 		mOAuthConsumer.setTokenWithSecret(token, tokenSecret);
 	}
 
@@ -126,7 +126,7 @@ public class GeeklistApi {
 		return "";
 	}
 	
-	public void getAccessToken(String oauthVerifier) throws GeeklistApiException
+	public void retrieveAccessToken(String oauthVerifier) throws GeeklistApiException
 	{
 		try {
 			mOAuthProvider.retrieveAccessToken(mOAuthConsumer, oauthVerifier);
