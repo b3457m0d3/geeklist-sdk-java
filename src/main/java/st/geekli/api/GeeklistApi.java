@@ -60,9 +60,9 @@ public class GeeklistApi {
 
 	private DefaultHttpClient mClient;
 	private OAuthProvider mOAuthProvider = new CommonsHttpOAuthProvider(
-			"http://sandbox-api.geekli.st/v1/oauth/request_token",
-			"http://sandbox-api.geekli.st/v1/oauth/access_token",
-			"http://sandbox.geekli.st/oauth/authorize"
+			API_URL + "v1/oauth/request_token",
+            API_URL + "v1/oauth/access_token",
+            API_URL + "oauth/authorize"
 			);
 	private OAuthConsumer mOAuthConsumer;
 	
@@ -121,7 +121,8 @@ public class GeeklistApi {
 	
 	public String authorize(String requestToken) throws GeeklistApiException
 	{
-		doRequest("http://sandbox.geekli.st/oauth/authorize", HttpMethod.GET, false);
+        //FIXME WTF?
+		doRequest(API_URL + "/oauth/authorize", HttpMethod.GET, false);
 		return "";
 	}
 	
