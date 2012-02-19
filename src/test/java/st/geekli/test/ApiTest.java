@@ -265,7 +265,7 @@ public class ApiTest {
 				assertNotNull("id can't be null!", followers[0].getId());
 			}
 		} catch (GeeklistApiException e) {
-			fail("getFollowers(username) failed!");
+			fail("getFollowers(username) failed! -> " +e);
 		}
 	}
 	
@@ -281,7 +281,7 @@ public class ApiTest {
 				assertNotNull("id can't be null!", following[0].getId());
 			}
 		} catch (GeeklistApiException e) {
-			fail("getFollowing() failed!");
+			fail("getFollowing() failed! -> " +e);
 		}
 	}
 	
@@ -297,7 +297,7 @@ public class ApiTest {
 				assertNotNull("id can't be null!", following[0].getId());
 			}
 		} catch (GeeklistApiException e) {
-			fail("getFollowing(username) failed!");
+			fail("getFollowing(username) failed! -> " +e);
 		}
 	}
 
@@ -307,7 +307,7 @@ public class ApiTest {
         try {
             client.unfollow(FOLLOW_USER);
         } catch (GeeklistApiException e) {
-            fail("unfollow(username) failed! "+ e);
+            fail("unfollow(username) failed! -> "+ e);
         }
     }
 
@@ -316,7 +316,7 @@ public class ApiTest {
 		try {
 			client.follow(FOLLOW_USER);
 		} catch (GeeklistApiException e) {
-			fail("follow(username) failed! -> "+e);
+			fail("follow(username) failed! -> " +e);
 		}
 	}
 
@@ -332,7 +332,7 @@ public class ApiTest {
 				assertNotNull("id can't be null!", activities[0].getId());
 			}
 		} catch (GeeklistApiException e) {
-			fail("getActivity() failed! ->" + e);
+			fail("getActivity() failed! -> " +e);
 		}
 	}
 	
@@ -348,7 +348,7 @@ public class ApiTest {
 				assertNotNull("id can't be null!", activities[0].getId());
 			}
 		} catch (GeeklistApiException e) {
-			fail("getActivity(username) failed!");
+			fail("getActivity(username) failed! -> " +e);
 		}
 	}
 	
@@ -364,7 +364,7 @@ public class ApiTest {
 				assertNotNull("id can't be null!", activities[0].getId());
 			}
 		} catch (GeeklistApiException e) {
-			fail("getActivity(username) failed!");
+			fail("getActivity(username) failed! -> "+e);
 		}
 	}
 	
