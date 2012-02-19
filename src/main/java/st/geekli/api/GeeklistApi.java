@@ -95,11 +95,15 @@ public class GeeklistApi {
 	public void setOAuthTokenAndSecret(String token, String tokenSecret) {
 		mOAuthConsumer.setTokenWithSecret(token, tokenSecret);
 	}
-	
-	public String getRequestToken(String callbackUrl) throws GeeklistApiException
+
+    public String getRequestToken() throws GeeklistApiException{
+        return getRequestToken(null);
+    }
+
+    public String getRequestToken(String callbackUrl) throws GeeklistApiException
 	{
 		try {
-			if(mUseCallback) {
+			if(mUseCallback && callbackUrl != null) {
 				return mOAuthProvider.retrieveRequestToken(mOAuthConsumer, callbackUrl);
 			} else {
 				return mOAuthProvider.retrieveRequestToken(mOAuthConsumer, OAuth.OUT_OF_BAND);
