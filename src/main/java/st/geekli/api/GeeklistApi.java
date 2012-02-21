@@ -316,14 +316,14 @@ public class GeeklistApi {
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		params.put("user", username);
 		params.put("action", "follow");
-		doRequest(buildApiRequestUrl("follow"), params, HttpMethod.POST, true);
+		doRequest(buildApiRequestUrl("user/follow"), params, HttpMethod.POST, true);
 	}
 	
 	public void unfollow(String username) throws GeeklistApiException
 	{
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		params.put("user", username);
-		doRequest(buildApiRequestUrl("follow"), params, HttpMethod.POST, true);
+		doRequest(buildApiRequestUrl("user/follow"), params, HttpMethod.POST, true);
 	}
 	
 	public Activity[] getActivity(int page, int count) throws GeeklistApiException

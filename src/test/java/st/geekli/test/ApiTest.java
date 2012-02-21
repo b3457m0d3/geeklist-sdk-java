@@ -299,9 +299,8 @@ public class ApiTest {
 		}
 	}
 
-    @Test @Ignore public void testUnFollow()
+    @Test public void testUnFollow()
     {
-
         try {
             client.unfollow(FOLLOW_USER);
         } catch (GeeklistApiException e) {
@@ -309,7 +308,7 @@ public class ApiTest {
         }
     }
 
-	@Test @Ignore public void testFollow()
+	@Test public void testFollow()
 	{
 		try {
 			client.follow(FOLLOW_USER);
