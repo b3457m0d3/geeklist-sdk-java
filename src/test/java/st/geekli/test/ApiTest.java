@@ -16,13 +16,10 @@
 
 package st.geekli.test;
 
-import static org.junit.Assert.*;
-
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
-
 import st.geekli.api.GeeklistApi;
 import st.geekli.api.GeeklistApiException;
 import st.geekli.api.type.Activity;
@@ -34,6 +31,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
+
+import static org.junit.Assert.*;
 
 public class ApiTest {
 
@@ -353,12 +352,15 @@ public class ApiTest {
 	{
 		try {
 			Activity[] activities = client.getAllActivity();
-			
+
 			assertNotNull("getActivity(username) should not return null. We want an empty array?", activities);
-			
+
+            GeeklistApi.debugOut("Activities found",""+activities.length);
+
 			if(activities.length > 0)
 			{
 				assertNotNull("id can't be null!", activities[0].getId());
+                GeeklistApi.debugOut("Activity#0",activities[0].toString());
 			}
 		} catch (GeeklistApiException e) {
 			fail("getActivity(username) failed! -> "+e);
