@@ -63,4 +63,17 @@ public class Activity implements GeeklistType {
 	public void setId(String id) {
 		this.id = id;
 	}
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer();
+        sb.append("Activity");
+        sb.append("{user=").append(user);
+        sb.append(", type='").append(type).append('\'');
+        sb.append(", id='").append(id).append('\'');
+        sb.append(", createdAt=").append(createdAt);
+        sb.append(", updatedAt=").append(updatedAt);
+        sb.append('}');
+        return sb.toString();
+    }
 }
