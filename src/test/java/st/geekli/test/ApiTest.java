@@ -372,7 +372,7 @@ public class ApiTest {
 			client.highfive("card", HIGHFIVE_ITEM);
 		} catch (GeeklistApiException e) {
 
-            //It would have worked it wouldn't be for a the duplicate
+            //It would have worked if it wouldn't be for a the duplicate ^5
             if( ! e.getMessage().contains("Duplicate")){
                 fail("highfive(type, id) failed! -> "+e);
             }
