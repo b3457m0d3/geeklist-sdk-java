@@ -466,8 +466,11 @@ public class GeeklistApi {
 
             GeeklistApi.debugOut("Response-Code", Integer.toString(response.getStatusLine().getStatusCode()) );
 
-            if(response.getStatusLine().getStatusCode() == HttpStatus.SC_OK)
-			{
+            if(
+                response.getStatusLine().getStatusCode() == HttpStatus.SC_OK ||
+                response.getStatusLine().getStatusCode() == HttpStatus.SC_FORBIDDEN ||
+                response.getStatusLine().getStatusCode() == HttpStatus.SC_UNAUTHORIZED
+            ){
                 JSONObject responseObject = new JSONObject(Utils.inputStreamToString(response.getEntity().getContent()));
 
                 if(responseObject.optString("status").equals("ok"))
@@ -486,6 +489,7 @@ public class GeeklistApi {
 				}
 					
 			} else {
+                GeeklistApi.debugOut("Failed body length",""+response.getEntity().getContentLength());
                 response.getEntity().consumeContent();
 				throw new GeeklistApiException(response.getStatusLine().getReasonPhrase());
 			}
