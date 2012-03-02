@@ -18,7 +18,6 @@ package st.geekli.test;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import st.geekli.api.GeeklistApi;
 import st.geekli.api.GeeklistApiException;
@@ -183,11 +182,11 @@ public class ApiTest {
 	@Test public void testCreateCard()
 	{
 		try {
-			Card newCard = client.createCard("JUnit Testcard - "+(int)(Math.random()*100));
+			Card newCard = client.createCard("JUnit Testcard - " + System.currentTimeMillis());
 			assertNotNull("Creating a card failed!", newCard);
 			assertNotNull("id of new card can't be null!", newCard.getId());
 		} catch (GeeklistApiException e) {
-			fail("createCard(headline) failed! -> "+e);
+			fail("createCard failed! -> "+e);
 		}
 	}
 	
@@ -367,12 +366,16 @@ public class ApiTest {
 		}
 	}
 	
-	@Test @Ignore public void testHighfive()
+	@Test public void testHighfive()
 	{
 		try {
 			client.highfive("card", HIGHFIVE_ITEM);
 		} catch (GeeklistApiException e) {
-			fail("highfive(type, id) failed! -> "+e);
+
+            //It would have worked it wouldn't be for a the duplicate
+            if( ! e.getMessage().contains("Duplicate")){
+                fail("highfive(type, id) failed! -> "+e);
+            }
 		}
 	}
 	
