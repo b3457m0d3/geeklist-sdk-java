@@ -18,17 +18,20 @@ package st.geekli.api.type;
 
 import java.util.Date;
 
-public class Activity implements GeeklistType {
+public abstract class Activity implements GeeklistType {
 
+    public enum TYPE{SIGNUP, CARD, MICRO, COMMIT, HIGHFIVE };
+    
 	private User user;
-	private String type, id;
+	private TYPE type;
+    private String id, content;
 	private Date createdAt, updatedAt;
 	
 	public User getUser() {
 		return user;
 	}
 	
-	public void setUser(User user) {
+	private void setUser(User user) {
 		this.user = user;
 	}
 	
@@ -36,7 +39,7 @@ public class Activity implements GeeklistType {
 		return updatedAt;
 	}
 	
-	public void setUpdatedAt(Date updatedAt) {
+	private void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 
@@ -44,25 +47,27 @@ public class Activity implements GeeklistType {
 		return createdAt;
 	}
 
-	public void setCreatedAt(Date createdAt) {
+	private void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
 
-	public String getType() {
-		return type;
-	}
+	public abstract TYPE getType();
 
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getId() {
+    public String getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	private void setId(String id) {
 		this.id = id;
 	}
+
+    public String getContent() {
+        return content;
+    }
+
+    private void setContent(String content) {
+        this.content = content;
+    }
 
     @Override
     public String toString() {
