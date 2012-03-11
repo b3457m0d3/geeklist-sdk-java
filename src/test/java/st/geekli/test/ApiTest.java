@@ -18,6 +18,7 @@ package st.geekli.test;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import st.geekli.api.GeeklistApi;
 import st.geekli.api.GeeklistApiException;
@@ -34,8 +35,6 @@ import java.util.Properties;
 import static org.junit.Assert.*;
 
 public class ApiTest {
-
-    //TODO move me to property files
 
 	// Enter your API credentials here.
 	private static String CONSUMER_KEY;
@@ -317,7 +316,7 @@ public class ApiTest {
 		}
 	}
 
-	@Test public void testGetActivity()
+	@Test @Ignore public void testGetActivity()
 	{
 		try {
 			Activity[] activities = client.getActivity();
@@ -333,7 +332,7 @@ public class ApiTest {
 		}
 	}
 	
-	@Test public void testGetOtherActivity()
+	@Test @Ignore public void testGetOtherActivity()
 	{
 		try {
 			Activity[] activities = client.getActivity(GKLST_HANDLE_SOMEONE_ELSE);
@@ -349,7 +348,7 @@ public class ApiTest {
 		}
 	}
 	
-	@Test public void testGetAllActivity()
+	@Test @Ignore public void testGetAllActivity()
 	{
 		try {
 			Activity[] activities = client.getAllActivity();
