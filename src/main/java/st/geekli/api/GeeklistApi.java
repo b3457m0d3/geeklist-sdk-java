@@ -63,7 +63,7 @@ public class GeeklistApi {
 	private OAuthProvider mOAuthProvider = new CommonsHttpOAuthProvider(
 			API_URL + "v1/oauth/request_token",
             API_URL + "v1/oauth/access_token",
-            API_URL + "oauth/authorize"
+            SITE_URL + "oauth/authorize"
 			);
 	private OAuthConsumer mOAuthConsumer;
 	
