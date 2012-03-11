@@ -51,7 +51,8 @@ import java.util.Map;
 public class GeeklistApi {
 
 	public static final String VERSION_1 = "v1";	
-	private static final String API_URL = "http://sandbox-api.geekli.st/";
+	private static String API_URL = "http://sandbox-api.geekli.st/";
+	private static String SITE_URL = "http://sandbox.geekli.st/";
 	private static final String DEFAULT_USER_AGENT = "Geekli.st for Java/1.0";
 	
 	private boolean mUseCallback = true;
@@ -121,8 +122,7 @@ public class GeeklistApi {
 	
 	public String authorize(String requestToken) throws GeeklistApiException
 	{
-        //FIXME WTF?
-		doRequest(API_URL + "/oauth/authorize", HttpMethod.GET, false);
+		doRequest(SITE_URL + "/oauth/authorize", HttpMethod.GET, false);
 		return "";
 	}
 	
@@ -540,4 +540,10 @@ public class GeeklistApi {
             System.out.println("[GEEKLIST] " + key + ": " + value);
         }
     }
+
+    public void setUseLiveSystem(){
+        API_URL = "http://api.geekli.st/";
+        SITE_URL = "http://geekli.st/";
+    }
+
 }
