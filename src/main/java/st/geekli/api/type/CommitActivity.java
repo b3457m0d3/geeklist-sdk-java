@@ -13,4 +13,9 @@ public class CommitActivity extends Activity{
     public TYPE getType() {
         return TYPE.COMMIT;
     }
+
+    @Override
+    public String getContent() {
+        return "I'm a commit (yet to be based on real data)";
+    }
 }

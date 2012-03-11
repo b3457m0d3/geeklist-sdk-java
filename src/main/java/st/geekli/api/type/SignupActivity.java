@@ -13,4 +13,9 @@ public class SignupActivity extends Activity{
     public TYPE getType() {
         return TYPE.SIGNUP;
     }
+
+    @Override
+    public String getContent() {
+        return "just signed up to Geeklist. Welcome!";
+    }
 }

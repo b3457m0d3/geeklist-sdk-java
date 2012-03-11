@@ -13,4 +13,9 @@ public class CardActivity extends Activity{
     public TYPE getType() {
         return TYPE.CARD;
     }
+
+    @Override
+    public String getContent() {
+        return "I'm a card (yet to be based on real data)";
+    }
 }

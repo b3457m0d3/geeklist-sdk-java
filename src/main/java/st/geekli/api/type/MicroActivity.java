@@ -14,5 +14,8 @@ public class MicroActivity extends Activity{
         return TYPE.MICRO;
     }
 
-
+    @Override
+    public String getContent() {
+        return "I'm a micro (yet to be based on real data)";
+    }
 }

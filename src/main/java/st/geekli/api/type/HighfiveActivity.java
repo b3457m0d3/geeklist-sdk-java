@@ -13,4 +13,9 @@ public class HighfiveActivity extends Activity{
     public TYPE getType() {
         return TYPE.HIGHFIVE;
     }
+
+    @Override
+    public String getContent() {
+        return "I'm a ^5 (yet to be based on real data)";
+    }
 }
