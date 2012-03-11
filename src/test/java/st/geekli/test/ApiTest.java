@@ -99,9 +99,11 @@ public class ApiTest {
 
         } catch (FileNotFoundException e) {
             GeeklistApi.debugOut("Properties file missing",PROPS_FILE_API);
+            System.err.println("Properties file missing '" + PROPS_FILE_API + "'");
             return null;
         } catch (IOException e) {
-            GeeklistApi.debugOut("IOException while reading properties file '"+filename+"'",e.getMessage());
+            GeeklistApi.debugOut("IOException while reading properties file '" + filename + "'", e.getMessage());
+            System.err.println("IOException while reading properties file '" + filename + "' [message=" + e.getMessage());
             return null;
         }
 
