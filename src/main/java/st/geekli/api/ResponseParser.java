@@ -19,6 +19,7 @@ package st.geekli.api;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import st.geekli.api.type.Activity;
 import st.geekli.api.type.GeeklistType;
 
 import java.lang.reflect.Array;
@@ -26,6 +27,8 @@ import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static st.geekli.api.type.Activity.TYPE;
 
 public class ResponseParser {
 
@@ -169,5 +172,22 @@ public class ResponseParser {
         } catch (IllegalAccessException e) {
             return null;
         }
+    }
+    
+    private static Class<?> parseActivity(JSONObject object) throws IllegalArgumentException{
+
+        if(object == null ){
+            throw new IllegalArgumentException();
+        }
+
+        try {
+            TYPE type = TYPE.valueOf(object.get("type").toString().toUpperCase());
+            return Activity.getClassFromType(type);
+
+        } catch (JSONException e) {
+            GeeklistApi.debugOut("Given JSONObject has no field 'type'.", e.getMessage());
+            throw new IllegalArgumentException("Given JSONObject has no field 'type'.");
+        }
+
     }
 }
