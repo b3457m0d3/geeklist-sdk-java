@@ -20,25 +20,26 @@ import java.util.Date;
 
 public abstract class Activity implements GeeklistType {
 
-    public enum TYPE{SIGNUP, CARD, MICRO, COMMIT, HIGHFIVE };
-    
+
+
+    public enum TYPE{SIGNUP, CARD, MICRO, COMMIT, HIGHFIVE;};
 	private User user;
-	private TYPE type;
+
+    private TYPE type;
     private String id, content;
-	private Date createdAt, updatedAt;
-	
+    private Date createdAt, updatedAt;
 	public User getUser() {
 		return user;
 	}
-	
+
 	private void setUser(User user) {
 		this.user = user;
 	}
-	
+
 	public Date getUpdatedAt() {
 		return updatedAt;
 	}
-	
+
 	private void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
@@ -67,6 +68,24 @@ public abstract class Activity implements GeeklistType {
 
     private void setContent(String content) {
         this.content = content;
+    }
+
+    public static Class<?> getClassFromType(TYPE type) throws IllegalArgumentException{
+
+        switch (type) {
+            case MICRO:
+                return MicroActivity.class;
+            case SIGNUP:
+                return SignupActivity.class;
+            case CARD:
+                return CardActivity.class;
+            case COMMIT:
+                return CommitActivity.class;
+            case HIGHFIVE:
+                return HighfiveActivity.class;
+        }
+
+        throw new IllegalArgumentException();
     }
 
     @Override
